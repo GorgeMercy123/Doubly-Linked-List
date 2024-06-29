@@ -1,0 +1,55 @@
+#include <iostream>
+
+using namespace std;
+
+// Doubly linked list node structure
+struct Node {
+    int data;
+    Node* prev;
+    Node* next;
+    
+    Node(int val) : data(val), prev(nullptr), next(nullptr) {}
+};
+
+class DoublyLinkedList {
+private:
+    Node* head;
+    Node* tail;
+    
+public:
+    DoublyLinkedList() : head(nullptr), tail(nullptr) {}
+    
+    // Method to add a new node to the end of the list
+    void append(int val) {
+        Node* newNode = new Node(val);
+        if (head == nullptr) {
+            head = tail = newNode;
+        } else {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+    }
+    
+    // Method to print the elements of the list
+    void display() {
+        Node* current = head;
+        while (current != nullptr) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    DoublyLinkedList dll;
+    
+    dll.append(1);
+    dll.append(2);
+    dll.append(3);
+    
+    dll.display();
+    
+    return 0;
+}
